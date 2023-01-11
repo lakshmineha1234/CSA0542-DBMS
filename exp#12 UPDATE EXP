@@ -1,0 +1,77 @@
+mysql> CREATE FUNCTION REPEAT_DEMO(INC INT)
+    -> RETURNS CHAR(40)
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE INCOME INT;
+    -> SET INCOME=0;
+    -> REPEAT
+    -> SET INCOME=INCOME+INC;
+    -> UNTIL INCOME>4000
+    -> END REPEAT;
+    -> RETURN "INCOMOE>4000 DETECTED";
+    -> END;
+    -> $$
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select REPEAT_DEMO(3000);$$
++-----------------------+
+| REPEAT_DEMO(3000)     |
++-----------------------+
+| INCOMOE>4000 DETECTED |
++-----------------------+
+1 row in set (0.01 sec)
+
+mysql> select REPEAT_DEMO(4000);$$
++-----------------------+
+| REPEAT_DEMO(4000)     |
++-----------------------+
+| INCOMOE>4000 DETECTED |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE PROCEDURE WHILE_LOOP()
+    -> BEGIN
+    -> DECLARE num INT default 1;
+    -> DECLARE res varchar(50) default '';
+    -> WHILE num<71825 DO
+    -> SET res = CONCAT(res,num,',');
+    -> SET num = num*5;
+    -> END WHILE;
+    -> SELECT res;
+    -> END //
+Query OK, 0 rows affected (0.00 sec)
+mysql> call WHILE_LOOP();
+    -> END //
++----------------------------+
+| res                        |
++----------------------------+
+| 1,5,25,125,625,3125,15625, |
++----------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+mysql> CREATE FUNCTION WHILE_DEMO(VALUE CHAR(1))
+    -> RETURNS CHAR(20)
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE STR CHAR(100);
+    -> DECLARE I INT;
+    -> SET STR='';
+    -> SET I=1;
+    -> LABEL:
+    -> WHILE I<=5 DO
+    -> SET STR =CONCAT(STR,VALUE);
+    -> SET I=I+1;
+    -> END WHILE LABEL;
+    -> RETURN STR;
+    -> END;
+    -> $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT WHILE_DEMO('A');$$
++-----------------+
+| WHILE_DEMO('A') |
++-----------------+
+| AAAAA           |
++-----------------+
+1 row in set (0.00 sec)
