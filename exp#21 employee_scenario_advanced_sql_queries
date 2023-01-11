@@ -1,0 +1,61 @@
+mysql> selwct*from employee2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selwct*from employee2' at line 1
+mysql> select*from employee2;
++-------+-----------+------------+------------+--------+---------+------------+
+| Empid | Empname   | DOB        | DOJ        | Salary | Address | Experience |
++-------+-----------+------------+------------+--------+---------+------------+
+|   101 | Neha      | 2005-03-22 | 2022-01-13 |  24000 | Ongole  |          2 |
+|   102 | Sudheer   | 2003-09-28 | 2022-05-20 |  24000 | Ongole  |          2 |
+|   103 | Praneetha | 2004-01-03 | 2022-02-15 |  21000 | Chirala |          1 |
+|   104 | Tanuja    | 2005-07-16 | 2022-09-13 |  24000 | Ongole  |          3 |
+|   105 | Uma       | 2004-11-26 | 2021-08-23 |  24000 | Ongole  |          3 |
++-------+-----------+------------+------------+--------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from E2dept;
++--------+---------------+---------------+
+| Deptid | Deptname      | No_of_persons |
++--------+---------------+---------------+
+|      1 | Sales         |            40 |
+|      2 | Manufacturing |            25 |
+|      3 | HR            |            35 |
+|      4 | Accountant    |            42 |
+|      5 | Editorial     |            30 |
++--------+---------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select Empname,DOB from employee2 where DOB>='2003-01-01';
++-----------+------------+
+| Empname   | DOB        |
++-----------+------------+
+| Neha      | 2005-03-22 |
+| Sudheer   | 2003-09-28 |
+| Praneetha | 2004-01-03 |
+| Tanuja    | 2005-07-16 |
+| Uma       | 2004-11-26 |
++-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from E2dept;
++--------+---------------+---------------+
+| Deptid | Deptname      | No_of_persons |
++--------+---------------+---------------+
+|      1 | Sales         |            40 |
+|      2 | Manufacturing |            25 |
+|      3 | HR            |            35 |
+|      4 | Accountant    |            42 |
+|      5 | Editorial     |            30 |
++--------+---------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select  e.Empname,e.DOB,d.Deptid,d.Deptname from employee2 e inner join E2dept d on Deptid=d.Deptid;
++-----------+------------+--------+---------------+
+| Empname   | DOB        | Deptid | Deptname      |
++-----------+------------+--------+---------------+
+| Neha      | 2005-03-22 |      1 | Sales         |
+| Sudheer   | 2003-09-28 |      2 | Manufacturing |
+| Praneetha | 2004-01-03 |      3 | HR            |
+| Tanuja    | 2005-07-16 |      4 | Accountant    |
+| Uma       | 2004-11-26 |      5 | Editorial     |
++-----------+------------+--------+---------------+
+5 rows in set (0.00 sec)
