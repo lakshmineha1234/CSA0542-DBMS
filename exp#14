@@ -1,0 +1,83 @@
+mysql> use sse;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_sse     |
++-------------------+
+| empdept           |
+| employee1         |
+| faculty1          |
+| mark_view         |
+| mdept             |
+| mentees           |
+| mentees1          |
+| movies            |
+| person            |
+| student9          |
+| studentdepartment |
++-------------------+
+11 rows in set (0.00 sec)
+
+mysql> use sse;
+Database changed
+mysql> desc student9;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| studid  | int(10)     | YES  |     | NULL    |       |
+| stuname | varchar(10) | YES  |     | NULL    |       |
+| gender  | varchar(10) | YES  |     | NULL    |       |
+| studept | varchar(10) | YES  |     | NULL    |       |
+| city    | varchar(10) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> create user Neha;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> grant all on student to Neha;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Neha;
++-------------------------------------------------------+
+| Grants for Neha@%                                     |
++-------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'Neha'@'%'                      |
+| GRANT ALL PRIVILEGES ON `sse`.`student` TO 'Neha'@'%' |
++-------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all on student from Neha;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Neha;
++----------------------------------+
+| Grants for Neha@%                |
++----------------------------------+
+| GRANT USAGE ON *.* TO 'Neha'@'%' |
++----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> grant select,update on person to Neha;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Neha;
++------------------------------------------------------+
+| Grants for Neha@%                                    |
++------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'Neha'@'%'                     |
+| GRANT SELECT, UPDATE ON `sse`.`person` TO 'Neha'@'%' |
++------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke update on person from Neha;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Neha;
++----------------------------------------------+
+| Grants for Neha@%                            |
++----------------------------------------------+
+| GRANT USAGE ON *.* TO 'Neha'@'%'             |
+| GRANT SELECT ON `sse`.`person` TO 'Neha'@'%' |
++----------------------------------------------+
+2 rows in set (0.00 sec)
