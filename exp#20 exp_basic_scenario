@@ -1,0 +1,146 @@
+mysql> use sse;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_sse     |
++-------------------+
+| empdept           |
+| employee1         |
+| faculty1          |
+| mark_view         |
+| marks             |
+| movies            |
+| mdept             |
+| mentees           |
+| mentees1          |
+| person            |
+| student9          |
+| studentdepartment |
++-------------------+
+12 rows in set (0.00 sec)
+
+mysql> create table employee2(Empid int(10),Empname varchar(20),DOB DATE,DOJ DATE,Salary int(10),Address varchar(20),Experience int(1));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc employee2;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Empid      | int(10)     | YES  |     | NULL    |       |
+| Empname    | varchar(20) | YES  |     | NULL    |       |
+| DOB        | date        | YES  |     | NULL    |       |
+| DOJ        | date        | YES  |     | NULL    |       |
+| Salary     | int(10)     | YES  |     | NULL    |       |
+| Address    | varchar(20) | YES  |     | NULL    |       |
+| Experience | int(1)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> insert into employee2 values(101,"Neha",'2005-03-22','2022-01-13',15000,"Ongole",2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into employee2 values(102,"Sudheer",'2003-09-28','2022-05-20',15000,"Ongole",2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into employee2 values(103,"Praneetha",'2004-01-03','2022-02-15',19000,"Chirala",1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into employee2 values(104,"Tanuja",'2005-07-16','2022-09-13',14000,"Ongole",3);
+Query OK, 1 row affected (0.04 sec)
+
+mysql>  insert into employee2 values(105,"Uma",'2004-11-26','2021-08-23',20000,"Ongole",3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from employee2;
++-------+-----------+------------+------------+--------+---------+------------+
+| Empid | Empname   | DOB        | DOJ        | Salary | Address | Experience |
++-------+-----------+------------+------------+--------+---------+------------+
+|   101 | Neha      | 2005-03-22 | 2022-01-13 |  15000 | Ongole  |          2 |
+|   102 | Sudheer   | 2003-09-28 | 2022-05-20 |  15000 | Ongole  |          2 |
+|   103 | Praneetha | 2004-01-03 | 2022-02-15 |  19000 | Chirala |          1 |
+|   104 | Tanuja    | 2005-07-16 | 2022-09-13 |  14000 | Ongole  |          3 |
+|   105 | Uma       | 2004-11-26 | 2021-08-23 |  20000 | Ongole  |          3 |
++-------+-----------+------------+------------+--------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> update employee2 set Salary=21000 where address="Chirala";
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee2 set Salary=24000 where address="Ongole";
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select*from employee2;
++-------+-----------+------------+------------+--------+---------+------------+
+| Empid | Empname   | DOB        | DOJ        | Salary | Address | Experience |
++-------+-----------+------------+------------+--------+---------+------------+
+|   101 | Neha      | 2005-03-22 | 2022-01-13 |  24000 | Ongole  |          2 |
+|   102 | Sudheer   | 2003-09-28 | 2022-05-20 |  24000 | Ongole  |          2 |
+|   103 | Praneetha | 2004-01-03 | 2022-02-15 |  21000 | Chirala |          1 |
+|   104 | Tanuja    | 2005-07-16 | 2022-09-13 |  24000 | Ongole  |          3 |
+|   105 | Uma       | 2004-11-26 | 2021-08-23 |  24000 | Ongole  |          3 |
++-------+-----------+------------+------------+--------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create table E2dept(Deptid int(10),Deptname varchar(20),No_of_persons int(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into E2dept values(1,"Sales",40);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into E2dept values(2,"Manufacturing",25);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into E2dept values
+    -> (3,"HR",35);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into E2dept values(4,"Accountant",42);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into E2dept values(5,"Editorial",30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from E2dept;
++--------+---------------+---------------+
+| Deptid | Deptname      | No_of_persons |
++--------+---------------+---------------+
+|      1 | Sales         |            40 |
+|      2 | Manufacturing |            25 |
+|      3 | HR            |            35 |
+|      4 | Accountant    |            42 |
+|      5 | Editorial     |            30 |
++--------+---------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select sum(Salary),min(Salary),max(Salary),avg(Salary) from employee2;
++-------------+-------------+-------------+-------------+
+| sum(Salary) | min(Salary) | max(Salary) | avg(Salary) |
++-------------+-------------+-------------+-------------+
+|      117000 |       21000 |       24000 |  23400.0000 |
++-------------+-------------+-------------+-------------+
+1 row in set (0.01 sec)
+
+mysql> select Empname,Salary from employee2 where Empid=102;
++---------+--------+
+| Empname | Salary |
++---------+--------+
+| Sudheer |  24000 |
++---------+--------+
+1 row in set (0.00 sec)
+
+mysql> delete from employee2 where Empid=5;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select*from employee2;
++-------+-----------+------------+------------+--------+---------+------------+
+| Empid | Empname   | DOB        | DOJ        | Salary | Address | Experience |
++-------+-----------+------------+------------+--------+---------+------------+
+|   101 | Neha      | 2005-03-22 | 2022-01-13 |  24000 | Ongole  |          2 |
+|   102 | Sudheer   | 2003-09-28 | 2022-05-20 |  24000 | Ongole  |          2 |
+|   103 | Praneetha | 2004-01-03 | 2022-02-15 |  21000 | Chirala |          1 |
+|   104 | Tanuja    | 2005-07-16 | 2022-09-13 |  24000 | Ongole  |          3 |
+|   105 | Uma       | 2004-11-26 | 2021-08-23 |  24000 | Ongole  |          3 |
++-------+-----------+------------+------------+--------+---------+------------+
+5 rows in set (0.01 sec)
